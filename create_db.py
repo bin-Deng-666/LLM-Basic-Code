@@ -6,7 +6,7 @@ import os
 
 CHROMA_PATH = "database"
 DATA_PATH = "data/books"
-MODEL_PATH = "/home/hadoop-kg-llm-ddpt/dolphinfs_hdd_hadoop-kg-llm-ddpt/dengbin16/RAG demo/model/all-MiniLM-L6-v2"
+MODEL_PATH = "YOUR_MODEL_PATH"
 
 if __name__ == "__main__":
     # Load and split documents
