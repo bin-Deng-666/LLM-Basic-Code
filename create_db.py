@@ -8,7 +8,7 @@ import os
 
 CHROMA_PATH = "database"
 DATA_PATH = "data"
-EMB_MODEL_PATH = "YOUR_TEXT_EMBEDDING_MODEL_PATHR_"
+EMB_MODEL_PATH = "YOUR_TEXT_EMBEDDING_MODEL_PATH"
 
 if __name__ == "__main__":
     # Make a new directory
