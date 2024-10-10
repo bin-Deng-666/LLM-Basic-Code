@@ -5,8 +5,8 @@ from transformers import AutoModel, AutoTokenizer, LogitsProcessorList
 from typing import Optional, Union
 import argparse
 
-EMB_MODEL_PATH = "/home/hadoop-kg-llm-ddpt/dolphinfs_hdd_hadoop-kg-llm-ddpt/dengbin16/langchain-RAG/model/all-MiniLM-L6-v2"
-CHAT_MODEL_PATH = "/home/hadoop-kg-llm-ddpt/dolphinfs_hdd_hadoop-kg-llm-ddpt/fengyizhe2001/GLM-4-main/glm-4-9b-chat"
+EMB_MODEL_PATH = "YOUR_TEXT_EMBEDDING_MODEL_PATH"
+CHAT_MODEL_PATH = "YOUR_CHAT_MODEL_PATH"
 CHROMA_PATH = "database"
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:

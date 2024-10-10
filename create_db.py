@@ -8,7 +8,7 @@ import os
 
 CHROMA_PATH = "database"
 DATA_PATH = "data"
-EMB_MODEL_PATH = "/home/hadoop-kg-llm-ddpt/dolphinfs_hdd_hadoop-kg-llm-ddpt/dengbin16/RAG demo/model/all-MiniLM-L6-v2"
+EMB_MODEL_PATH = "YOUR_TEXT_EMBEDDING_MODEL_PATHR_"
 
 if __name__ == "__main__":
     # Make a new directory
