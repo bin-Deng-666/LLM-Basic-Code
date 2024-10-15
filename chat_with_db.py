@@ -58,7 +58,7 @@ if __name__ == "__main__":
     }
     
     inputs = tokenizer(input_message, return_tensors="pt", padding="max_length", truncation=True, max_length=max_input_tokens).to(model.device)
-    outputs = model.generate(**inputs, **gen_kwargs)
+    outputs = model.generate(**inputs, **gen_kwargs)[:, inputs['input_ids'].shape[1]:]
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
     print(response)
