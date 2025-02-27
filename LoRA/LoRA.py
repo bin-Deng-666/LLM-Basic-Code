@@ -38,6 +38,8 @@ class LoRA(nn.Module):
         output = self.dropout(output)
 
         return output
+        
+        
 if __name__ == "__main__":
 
     # Example usage of LoRA module
