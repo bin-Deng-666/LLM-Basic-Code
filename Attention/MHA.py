@@ -26,7 +26,7 @@ class MultiHeadSelfAttention(nn.Module):
         K = K.view(batch_size, seq_len, self.head_num, self.head_dim).transpose(1, 2)
         V = V.view(batch_size, seq_len, self.head_num, self.head_dim).transpose(1, 2)
         
-        attn_scores = torch.matmul(Q, V.transpose(-2, -1)) / torch.sqrt(self.head_dim)
+        attn_scores = torch.matmul(Q, K.transpose(-2, -1)) / torch.sqrt(self.head_dim)
         if attention_mask is not None:
             attn_scores = attn_scores.masked_fill(attention_mask.unsqueeze(1) == 0, float('-inf'))
 
