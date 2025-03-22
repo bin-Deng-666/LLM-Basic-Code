@@ -15,4 +15,3 @@ class RMSNorm(nn.Module):
         x_normalized = x / rms # (batch_size, seq_len, hidden_dim)
         output = x_normalized * self.gamma # (batch_size, seq_len, hidden_dim)
         return output
-        
