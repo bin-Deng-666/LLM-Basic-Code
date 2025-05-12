@@ -1,5 +1,4 @@
 from typing import List
-
 from transformers import AutoModel, AutoTokenizer
 
 class BaseModel:
@@ -36,6 +35,7 @@ class GLM4Chat(BaseModel):
         
         history += [{"role": "assistant", "content": outputs}]
         return outputs, history
+        
         
 # if __name__ == '__main__':
 #     model = GLM4Chat('YOUR MODEL PATH')

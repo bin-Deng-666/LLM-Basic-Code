@@ -8,8 +8,7 @@ class LoRA(nn.Module):
                  in_features: int,
                  out_features: int,
                  rank: int=16,
-                 lora_alpha: int=16,
-                 dropout_rate: float=0.5):
+                 lora_alpha: int=16):
         super().__init__()
         
         # Original linaer layer
@@ -17,15 +16,11 @@ class LoRA(nn.Module):
         self.linear.weight.requires_grad = False
 
         # Two lower rank matrixs
-        self.lora_a = nn.Parameter(torch.zeros(in_features, rank))
+        self.lora_a = nn.Parameter(torch.randn(in_features, rank) * 1 / math.sqrt(rank))
         self.lora_b = nn.Parameter(torch.zeros(rank, out_features))
-        nn.init.kaiming_uniform_(self.lora_a, a=math.sqrt(5))
-        nn.init.zeros_(self.lora_b)
 
         # Get the scale parameter
         self.scale = lora_alpha / rank
-
-        self.dropout = nn.Dropout(dropout_rate)
     
     def forward(self, x):
         # Get the combined weights
@@ -34,11 +29,7 @@ class LoRA(nn.Module):
         # Go through the linear layer
         output = F.linear(x, weight, self.linear.bias)
 
-        # Apply the dropout
-        output = self.dropout(output)
-
         return output
-        
         
 if __name__ == "__main__":
 
