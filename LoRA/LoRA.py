@@ -18,7 +18,6 @@ class LoRA(nn.Module):
         nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
 
     def forward(self, X: torch.Tensor) -> torch.Tensor:
-        y = F.linear(X, self.weight)                 # 原始前向
-        lora_path = (F.linear(F.linear(X, self.lora_A), self.lora_B)
-                     * (self.alpha / self.rank))     # 缩放
+        y = F.linear(X, self.weight)
+        lora_path = F.linear(F.linear(X, self.lora_A), self.lora_B) * (self.alpha / self.rank)
         return y + lora_path
