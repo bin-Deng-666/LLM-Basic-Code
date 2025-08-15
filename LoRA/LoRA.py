@@ -4,50 +4,21 @@ import torch.nn.functional as F
 import math
 
 class LoRA(nn.Module):
-    def __init__(self,
-                 in_features: int,
-                 out_features: int,
-                 rank: int=16,
-                 lora_alpha: int=16):
+    def __init__(self, weight: torch.Tensor, rank: int = 4, alpha: float = 1.0):
         super().__init__()
-        
-        # Original linaer layer
-        self.linear = nn.Linear(in_features, out_features)
-        self.linear.weight.requires_grad = False
+        self.weight = weight
+        self.rank = rank
+        self.alpha = alpha
+        self.weight.requires_grad_(False)
 
-        # Two lower rank matrixs
-        self.lora_a = nn.Parameter(torch.randn(in_features, rank) * 1 / math.sqrt(rank))
-        self.lora_b = nn.Parameter(torch.zeros(rank, out_features))
+        out_features, in_features = weight.size()
+        self.lora_A = nn.Parameter(torch.empty(rank, in_features))
+        self.lora_B = nn.Parameter(torch.empty(out_features, rank))
+        nn.init.zeros_(self.lora_B)
+        nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
 
-        # Get the scale parameter
-        self.scale = lora_alpha / rank
-    
-    def forward(self, x):
-        # Get the combined weights
-        weight = self.linear.weight + self.scale * (self.lora_a @ self.lora_b).transpose(0, 1)
-
-        # Go through the linear layer
-        output = F.linear(x, weight, self.linear.bias)
-
-        return output
-        
-if __name__ == "__main__":
-
-    # Example usage of LoRA module
-    model = LoRA(in_features=32, out_features=64)
-
-    # Create random input tensor
-    x = torch.randn(10, 32)  # Batch size 10, input features 32
-
-    # Forward pass
-    y = model(x)
-
-    print("Output shape:", y.shape)
-    
-    # Check gradients
-    loss = y.sum()
-    loss.backward()
-
-    for name, param in model.named_parameters():
-        if param.requires_grad:
-            print(f"Parameter {name} grad:\n{param.grad}")
+    def forward(self, X: torch.Tensor) -> torch.Tensor:
+        y = F.linear(X, self.weight)                 # 原始前向
+        lora_path = (F.linear(F.linear(X, self.lora_A), self.lora_B)
+                     * (self.alpha / self.rank))     # 缩放
+        return y + lora_path
