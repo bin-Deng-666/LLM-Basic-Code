@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch.nn.functional as F
 import torch
 
 class RNN(nn.Module):
@@ -25,11 +26,11 @@ class RNN(nn.Module):
             h = torch.tanh(
                     torch.mm(x_i, self.w_xh) + 
                     torch.mm(h, self.w_hh) + 
-                    self.bias_h.squeeze(1)
+                    self.bias_h
                 )
-        
-        output = self.output(h)
-        return output
 
+        return self.output(h)
 
+def cos_distance(output1, output2):
+    return 1 - F.cosine_similarity(output1, output2)
 
