@@ -30,7 +30,6 @@ LLM-Basic-Code/
 │   ├── LayerNorm.py    # 层归一化
 │   └── RMSNorm.py      # RMS归一化
 ├── RAG/                # 检索增强生成
-│   ├── README.md
 │   ├── chat_with_db.py
 │   ├── create_db.py
 │   └── data/
