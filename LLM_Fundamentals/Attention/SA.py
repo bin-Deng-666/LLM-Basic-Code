@@ -2,9 +2,7 @@ import torch.nn as nn
 import torch
 
 class SelfAttention(nn.Module):
-    def __init__(self,
-                 hidden_dim: int, 
-                 dropout_rate: float):
+    def __init__(self, hidden_dim: int, dropout_rate: float):
         super().__init__()
         self.hidden_dim = hidden_dim
         
