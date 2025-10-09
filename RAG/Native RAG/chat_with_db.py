@@ -30,13 +30,8 @@ if __name__ == "__main__":
 
     # 获得问题
     query_text = args.query_text
-
-    # 验证API密钥
-    if not API_KEY:
-        print("错误: 请在.env文件中设置SILICONFLOW_API_KEY")
-        exit(1)
     
-    # 准备给予Chroma的向量检索库
+    # 准备基于Chroma的向量检索库
     embeddings = OpenAIEmbeddings(
         base_url="https://api.siliconflow.cn/v1",
         model="Qwen/Qwen3-Embedding-0.6B",
@@ -47,13 +42,13 @@ if __name__ == "__main__":
     # 检索向量库
     results = db.similarity_search_with_relevance_scores(query_text, k=3)
     
-    # 检索出来的内容
+    # 检索出来的内容拼接为Prompt
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
     print(prompt)
     
-    # 生成回答
+    # 定义LLM并生成回答
     llm = ChatOpenAI(
         base_url="https://api.siliconflow.cn/v1",
         api_key=API_KEY,
