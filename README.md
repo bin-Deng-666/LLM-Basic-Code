@@ -29,6 +29,7 @@ LLM-Basic-Code/
 │   │   ├── DPO.py       # DPO
 │   │   └── KL.py        # KL散度
 │   ├── Normalization/   # 归一化层
+│   │   ├── BatchNorm.py # 批归一化
 │   │   ├── LayerNorm.py # 层归一化
 │   │   └── RMSNorm.py   # RMS归一化
 │   ├── RNN/             # 循环神经网络
@@ -38,14 +39,17 @@ LLM-Basic-Code/
 │   └── Transformer/     # Transformer模型
 │       └── Transformer.py
 ├── RAG/                 # 检索增强生成
-│   ├── chat_with_db.py
-│   ├── create_db.py
-│   └── data/
-│       └── alice_in_wonderland.md
+│   ├── Agentic RAG/     # 智能体驱动的RAG实现
+│   │   └── rag_agent.py
+│   └── Native RAG/      # 原生RAG实现
+│       ├── chat_with_db.py
+│       ├── create_db.py
+│       └── data/
+│           └── alice_in_wonderland.txt
 ├── README.md
 ├── ReAct-Agent/         # ReAct智能体
 │   ├── agent.py
 │   ├── llm.py
 │   └── tool.py
-└── test.py             # 测试文件
+└── test.py              # 测试文件
 ```
