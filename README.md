@@ -18,8 +18,10 @@ LLM-Basic-Code/
 │   │   └── SwiGLU.py    # SwiGLU激活函数
 │   ├── Attention/       # 注意力机制
 │   │   ├── GQA.py       # Grouped Query Attention
+│   │   ├── GatedSA.py   # Gated Self-Attention
 │   │   ├── MHA.py       # Multi-Head Attention
 │   │   ├── MLA.py       # Multi-Head Latent Attention
+│   │   ├── MLA示意图.png # MLA机制示意图
 │   │   ├── MQA.py       # Multi-Query Attention
 │   │   └── SA.py        # Self-Attention
 │   ├── LoRA/            # LoRA微调
@@ -27,8 +29,10 @@ LLM-Basic-Code/
 │   ├── Loss/            # 损失函数
 │   │   ├── CrossEntropy.py # 交叉熵损失
 │   │   ├── DPO.py       # DPO
-│   │   └── KL.py        # KL散度
+│   │   ├── KL.py        # KL散度
+│   │   └── MSE_Gradient.py # MSE损失及梯度计算
 │   ├── Normalization/   # 归一化层
+│   │   ├── AdaNorm.py   # AdaNorm归一化
 │   │   ├── BatchNorm.py # 批归一化
 │   │   ├── LayerNorm.py # 层归一化
 │   │   └── RMSNorm.py   # RMS归一化
@@ -45,11 +49,11 @@ LLM-Basic-Code/
 │       ├── chat_with_db.py
 │       ├── create_db.py
 │       └── data/
-│           └── alice_in_wonderland.txt
-├── README.md
+│           └── KB.txt   # 知识库文件
 ├── ReAct-Agent/         # ReAct智能体
 │   ├── agent.py
 │   ├── llm.py
 │   └── tool.py
-└── test.py              # 测试文件
+├── .gitignore
+└── README.md
 ```
