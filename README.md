@@ -1,4 +1,4 @@
-# LLM-Code-Learning
+# LLM-Fundamentals
 
 一个用于学习大语言模型（LLM）核心算法和组件的代码库，包含从基础到进阶的各种实现。
 
